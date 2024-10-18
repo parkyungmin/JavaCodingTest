@@ -1,0 +1,12 @@
+SELECT A.ANIMAL_ID
+     , A.NAME
+  FROM (SELECT A.ANIMAL_ID AS ANIMAL_ID
+             , A.NAME      AS NAME
+             , B.ANIMAL_ID AS ANIMAL_ID2
+          FROM ANIMAL_OUTS A
+             , ANIMAL_INS  B
+         WHERE A.ANIMAL_ID = B.ANIMAL_ID(+)
+       ) A
+ WHERE A.ANIMAL_ID2 IS NULL
+ ORDER
+    BY A.ANIMAL_ID
