@@ -27,9 +27,11 @@ public class Main {
 
             if (x==1){
                 System.out.println(S[y-1]);
-            } else if (x==y) {
-                System.out.println(A[y-1]);
-            } else {
+            }
+//            else if (x==y) {
+//                System.out.println(A[y-1]); //생략가능
+//            }
+            else {
                 System.out.println(S[y-1] - S[x-2]);
             }
         }
