@@ -5,28 +5,33 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
 
-        int a[] = new int[N];
-        //입력받은 값 만큼 배열 셋팅
-        for(int i=0; i<N; i++) {
-            a[i] = i + 1;
-        }
-
-        int count = 0; //총 개수
-
-        //조건에 만족하는 수 구하기
-        for(int i=0; i<N; i++) {
-            int sum = 0;
-            for(int j=i; j<N; j++) {
-                sum += a[j];
-
-                if (sum > N) {
-                    break;
-                } else if (sum == N) {
-                    count++;
-                    break;
-                }
+        //변수 초기화
+        int count = 1; //자기 자신은 미리 count
+        int start_index = 1;
+        int end_index = 1;
+        int sum = 1;
+        
+        //자기자신을 만나면 반복문 종료
+        while (end_index != N) {
+            //sum이 N과 같으면  count +1, end를 +1 해주고 sum에 더한다.
+            if(sum == N) {
+                count++;
+                end_index++;
+                sum += end_index;
+            }
+            //sum이 N보다 크면 sum에서 start를 빼주고
+            else if (sum > N) {
+                sum -= start_index;
+                start_index++;
+            }
+            //sum이 N보다 작으면 end +1, sum에 end값 더해준다.
+            else {
+                end_index++;
+                sum += end_index;
             }
         }
+
         System.out.println(count);
+
     }
 }
