@@ -1,39 +1,35 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String args[]){
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int M = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        //입력받는 수가 많을 때는 BufferReader를 쓴다.
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-        //1.입력받은 N만큼 배열값 셋팅
-        int[] A = new int[N];
-        int[] S = new int[N]; //합배열
-        for(int i=0; i<N; i++) {
-            A[i] = sc.nextInt();
+        //계산해야 하는 개수가 최대 10만개 까지 들어오는데, int형으로 받기 힘들기 때문에 Stringtoken을 사용한다.
+        StringTokenizer stringTokenizer = new StringTokenizer(bufferedReader.readLine()); //readLine() : 입력된 첫 번째 줄을 읽어옴.
 
-            //합배열 셋팅
-            if (i==0){
-                S[i] = A[i];
-            } else {
-                S[i] = S[i-1] + A[i];
-            }
+        //첫 번째 줄에 셋팅하는 입력값 셋팅
+        int suNo = Integer.parseInt(stringTokenizer.nextToken()); //정수형으로 변경
+        int quizNo = Integer.parseInt(stringTokenizer.nextToken());
+
+        //합배열 구하기
+        long[] S = new long[suNo + 1]; //+1은 나중에 계산하기 편하게 하기 위해서..
+        stringTokenizer = new StringTokenizer(bufferedReader.readLine()); //한 줄에 입력된 값 한 번에 가져오기
+        for (int i=1; i<=suNo; i++) {
+            S[i] = S[i-1] + Integer.parseInt(stringTokenizer.nextToken()); //합배열 구하는 공식
         }
 
-        //2.입력받은 M만큼 구간합 출력
-        for(int i=0; i<M; i++) {
-            int x = sc.nextInt();
-            int y = sc.nextInt();
+        //출력값 구하기
+        for(int q=0; q<quizNo; q++) {
+            stringTokenizer = new StringTokenizer(bufferedReader.readLine()); //한 줄에 입력된 값 한 번에 가져오기
+            int i = Integer.parseInt(stringTokenizer.nextToken());
+            int j = Integer.parseInt(stringTokenizer.nextToken());
+            System.out.println(S[j] - S[i-1]);
 
-            if (x==1){
-                System.out.println(S[y-1]);
-            }
-//            else if (x==y) {
-//                System.out.println(A[y-1]); //생략가능
-//            }
-            else {
-                System.out.println(S[y-1] - S[x-2]);
-            }
         }
+
     }
 }
