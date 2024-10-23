@@ -1,0 +1,19 @@
+SELECT TO_CHAR(A.SALES_DATE,'YYYY-MM-DD') AS SALES_DATE
+     , A.PRODUCT_ID                     AS PRODUCT_ID
+     , A.USER_ID                        AS USER_ID
+     , A.SALES_AMOUNT                   AS SALES_AMOUNT
+  FROM ONLINE_SALE A
+ WHERE 1=1
+   AND TO_CHAR(A.SALES_DATE,'YYYYMM') = '202203'
+UNION ALL
+SELECT TO_CHAR(B.SALES_DATE,'YYYY-MM-DD') AS SALES_DATE
+     , B.PRODUCT_ID                     AS PRODUCT_ID
+     , TO_NUMBER(NULL)                  AS USER_ID    --NULL은 타입이 없기 때문에 형명시!!!
+     , B.SALES_AMOUNT                   AS SALES_AMOUNT
+  FROM OFFLINE_SALE B
+ WHERE 1=1
+   AND TO_CHAR(B.SALES_DATE,'YYYYMM') = '202203'
+ ORDER
+    BY SALES_DATE ASC
+     , PRODUCT_ID
+     , USER_ID
